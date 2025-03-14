@@ -9,6 +9,26 @@ records = [] #список для зранения записей предста
 shopping_dict = {} #словарь ключ-категория: значение-список кортежей(название покупки, сумма)
 the_amount = 0 # сумма расходов
 average_expense = 0# средние расходы
+def calculation_and_print(shopping_dict: dict):
+    for key, val in shopping_dict.items():
+        category = key
+        purchases_list = ''
+        total_amount = 0
+        count = 0
+        for i in val:
+            purchases_list += f' {i[0]}'
+            total_amount += i[1]
+            if count < len(val) - 1:
+                purchases_list += ','
+                count += 1
+
+        average_amount = total_amount / len(val)
+        print(Fore.YELLOW +"|Категория покупок: " + Style.RESET_ALL + category  +
+              Fore.YELLOW +" Список покупок: " + Style.RESET_ALL + purchases_list  +
+              Fore.YELLOW +" Суммарная стоимость: " + Style.RESET_ALL + str(total_amount)  +
+              Fore.YELLOW +' Средняя сумма: ' + Style.RESET_ALL + str(average_amount)  + '. ' )
+        print(Fore.RED + '-----------------------------'* 4 + Style.RESET_ALL)
+
 while True:
     purchases = input(Fore.GREEN + 'Введите покупки в формате:'+ Style.RESET_ALL + ' название покупки:сумма:категория. ' +
                       Fore.BLUE + Style.BRIGHT +'Стоп'+ Style.RESET_ALL + ' для завершения ввода.').lower()
@@ -39,31 +59,8 @@ average_expense = the_amount / len(records)
 print(Fore.RED + '*****************************'* 4 + Style.RESET_ALL)
 print(Fore.CYAN + f' Кол-во покупок:{Style.RESET_ALL} {len(records)} ||' +
       Fore.CYAN + f' Общая сумма расходов:{Style.RESET_ALL} {the_amount} ||' +
-      Fore.CYAN + f' Среднее значение расходов по всем категориям:{Style.RESET_ALL} {int(average_expense)} ||')
+      Fore.CYAN + f' Среднее значение расходов по всем категориям:{Style.RESET_ALL} {round(int(average_expense), 2)} ||')
 print(Fore.RED + '*****************************'* 4 + Style.RESET_ALL)
-list_of_keys = list(shopping_dict.keys()) # получили список с ключами
-index = 0 # счётчик, который будем использовать для доступа к элементам списка
-# Используем цикл while для итерации по категориям
-def calculation_and_print(shopping_dict: dict):
-    for key, val in shopping_dict.items():
-        category = key
-        purchases_list = ''
-        total_amount = 0
-        count = 0
-        for i in val:
-            purchases_list += f' {i[0]}'
-            total_amount += i[1]
-            if count < len(val) - 1:
-                purchases_list += ','
-                count += 1
-
-        average_amount = total_amount / len(val)
-        print(Fore.YELLOW +"Категория покупок: " + Style.RESET_ALL + category + '. '
-              + Fore.YELLOW +"Список покупок: " + Style.RESET_ALL + purchases_list + '. '
-              + Fore.YELLOW +"Суммарная стоимость: " + Style.RESET_ALL + str(total_amount) + '. '
-              + Fore.YELLOW +'Средняя сумма: ' + Style.RESET_ALL + str(average_amount) + '. ' )
-        print(Fore.RED + '-----------------------------'* 4 + Style.RESET_ALL)
-
 
 calculation_and_print(shopping_dict)
 
