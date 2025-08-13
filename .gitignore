@@ -1,0 +1,14 @@
+# Virtual envs
+.venv
+venv
+
+# IDE
+.idea
+.vscode
+
+# Docker
+docker-compose.override.yml
+**/volumes/
+**/data/
+*.log
+*.tmp

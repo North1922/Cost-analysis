@@ -55,7 +55,11 @@ while True:
         shopping_dict[category] = [(name, int(amount))]
 
 
-average_expense = the_amount / len(records)
+try:
+    average_expense = the_amount / len(records)
+except ZeroDivisionError as e:
+    print('Не одной позиции не было введено')
+
 print(Fore.RED + '*****************************'* 4 + Style.RESET_ALL)
 print(Fore.CYAN + f' Кол-во покупок:{Style.RESET_ALL} {len(records)} ||' +
       Fore.CYAN + f' Общая сумма расходов:{Style.RESET_ALL} {the_amount} ||' +
